@@ -1,3 +1,5 @@
-#include "fileOperator.cpp"
-#include "randomSearch.cpp"
-#include "operadorSolucao.cpp"
+#include "FileOperator.cpp"
+#include "RandomSearch.cpp"
+#include "Solution.cpp"
+#include "Clausule.cpp"
+#include "SimulatedAnealling.cpp"
