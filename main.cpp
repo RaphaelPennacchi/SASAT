@@ -11,7 +11,7 @@ double wtime() {
 int main(int argc, char const* argv[]) {
   FileOperator file;
   file.listOptions();
-  vector<Clausule> data = file.read(file.options[1]);
+  vector<Clausule> data = file.read(file.options[atoi(argv[2])]);
   Solution solution(file.nClause);
   solution.generate();
   double initialTime, finalTime;
@@ -19,9 +19,12 @@ int main(int argc, char const* argv[]) {
   SimulatedAnealling sa;
   RandomSearch rs;
   pair <vector<bool>, int> saResponse, rsResponse;
-  cout << "Argumento entrado: " << atoi(argv[1]) << endl;
+  cout << "***** Argumentos entrado ***** " << atoi(argv[1]) << endl;
+  cout << "Função de temperatura: " << atoi(argv[1]) << endl;
+  cout << "Arquivo: " << file.options[atoi(argv[2])] << endl;
+
   initialTime = wtime();
-  saResponse = sa.run(solution, data, 250000, 3.0, 0.0001, atoi(argv[1]));
+  saResponse = sa.run(solution, data, 10000, 3.0, 0.0000000001, atoi(argv[1]));
   finalTime = wtime();
   for (auto&& v : saResponse.first) {
     cout << v;
