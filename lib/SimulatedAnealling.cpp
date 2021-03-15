@@ -37,11 +37,9 @@ struct SimulatedAnealling {
     int i;
     int iteraction = -1;
 
-    cout << "compare: " << ((double)temperature * 1.0) - finalTemp << " " << temperature << " " << finalTemp  << endl;
-    while (temperature > finalTemp) {
-      cout << "Iteraction : " << iteraction << endl;
-      cout << "Temperature : " << temperature << endl;
-      for (i = 0; i < maxIterations && iteraction < 250000; i++) {
+    while (iteraction < maxIterations) {
+      //cout << iteraction << ", " << temperature << ", " << endl;
+      for (i = 0; i < 10 && iteraction < 250000; i++) {
         //Essa variável iteraction que será passada para a temperatura
         iteraction++;
         //Modifica a solucao em porcentagem
@@ -63,7 +61,7 @@ struct SimulatedAnealling {
           }
         }
       }
-      cout << "função temperatura : " << calculateTemperature2(i, maxIterations, initialTemp, finalTemp) << endl;
+      //cout << "função temperatura : " << calculateTemperature2(i, maxIterations, initialTemp, finalTemp) << endl;
       if (tempFunction == 1) temperature = calculateTemperature2(iteraction, maxIterations, initialTemp, finalTemp);
       else temperature = calculateTemperature(iteraction, maxIterations, initialTemp, finalTemp);
       i = 0;

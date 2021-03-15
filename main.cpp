@@ -19,12 +19,12 @@ int main(int argc, char const* argv[]) {
   SimulatedAnealling sa;
   RandomSearch rs;
   pair <vector<bool>, int> saResponse, rsResponse;
-  cout << "***** Argumentos entrado ***** " << atoi(argv[1]) << endl;
-  cout << "Função de temperatura: " << atoi(argv[1]) << endl;
+  cout << "***** Argumentos entrado ***** " << endl;
+  cout << "Função temperatura: " << atoi(argv[1]) << endl;
   cout << "Arquivo: " << file.options[atoi(argv[2])] << endl;
-
+  cout << "******************************" << endl;
   initialTime = wtime();
-  saResponse = sa.run(solution, data, 10000, 3.0, 0.0000000001, atoi(argv[1]));
+  saResponse = sa.run(solution, data, 250000, 3.0, 0.0000000001, atoi(argv[1]));
   finalTime = wtime();
   for (auto&& v : saResponse.first) {
     cout << v;
