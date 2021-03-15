@@ -19,24 +19,27 @@ int main(int argc, char const* argv[]) {
   SimulatedAnealling sa;
   RandomSearch rs;
   pair <vector<bool>, int> saResponse, rsResponse;
-  cout << "***** Argumentos entrado ***** " << endl;
-  cout << "Função temperatura: " << atoi(argv[1]) << endl;
-  cout << "Arquivo: " << file.options[atoi(argv[2])] << endl;
-  cout << "******************************" << endl;
+  //cout << "***** Argumentos entrado ***** " << endl;
+  //cout << "Função temperatura: " << atoi(argv[1]) << endl;
+  //cout << "Arquivo: " << file.options[atoi(argv[2])] << endl;
+  //cout << "Iterações loop interno: " << atoi(argv[3]) << endl;
+  //cout << "Iterações loop externo: " << atoi(argv[4]) << endl;
+  //cout << "******************************" << endl;
+
   initialTime = wtime();
-  saResponse = sa.run(solution, data, 250000, 3.0, 0.0000000001, atoi(argv[1]));
+  saResponse = sa.run(solution, data, atoi(argv[4]), 3.0, 0.0000000001, atoi(argv[1]), atoi(argv[3]));
   finalTime = wtime();
-  for (auto&& v : saResponse.first) {
-    cout << v;
-  }
-  cout << "\t" << saResponse.second << endl << "Time: " << finalTime - initialTime << endl;
+  // for (auto&& v : saResponse.first) {
+  //   cout << v;
+  // }
+  //cout << "\t" << saResponse.second << endl << "Time: " << finalTime - initialTime << endl;
   initialTime = wtime();
   rsResponse = rs.run(solution, data, 250000);
   finalTime = wtime();
-  for (auto&& v : rsResponse.first) {
-    cout << v;
-  }
-  cout << "\t" << rsResponse.second << endl << "Time: " << finalTime - initialTime << endl;
+  // for (auto&& v : rsResponse.first) {
+  //   cout << v;
+  // }
+  //cout << "\t" << rsResponse.second << endl << "Time: " << finalTime - initialTime << endl;
 
 
   return 0;

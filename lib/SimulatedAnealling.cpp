@@ -28,20 +28,21 @@ struct SimulatedAnealling {
     return ((double)a / (double)(actualIteration + 1)) + (double)b;
   }
 
-  pair <vector<bool>, int> run(Solution solution, vector <Clausule> clausule, int maxIterations, double initialTemp, double finalTemp, int tempFunction) {
+  pair <vector<bool>, int> run(Solution solution, vector <Clausule> clausule, int maxIterations, double initialTemp, double finalTemp, int tempFunction, int interLoop) {
     // Set the initial solution
     Solution fooSolution = solution;
     int sucess = 0, fooSucess = 0;
     double temperature = initialTemp;
-    int probability, cost, counter = 0;
+    int probability, cost;
     int i;
     int iteraction = -1;
 
     while (iteraction < maxIterations) {
-      //cout << iteraction << ", " << temperature << ", " << endl;
-      for (i = 0; i < 10 && iteraction < 250000; i++) {
+      iteraction++;
+      if (iteraction%100 == 0) cout << iteraction << " " << fooSucess << " " << endl;
+
+      for (i = 0; i < interLoop; i++) {
         //Essa variável iteraction que será passada para a temperatura
-        iteraction++;
         //Modifica a solucao em porcentagem
         fooSolution.modify((solution.nVariable / 20) ? solution.nVariable / 20 : 1);
         //Verificar se a solução atual é melhor que a anterior
@@ -61,6 +62,7 @@ struct SimulatedAnealling {
           }
         }
       }
+
       //cout << "função temperatura : " << calculateTemperature2(i, maxIterations, initialTemp, finalTemp) << endl;
       if (tempFunction == 1) temperature = calculateTemperature2(iteraction, maxIterations, initialTemp, finalTemp);
       else temperature = calculateTemperature(iteraction, maxIterations, initialTemp, finalTemp);
