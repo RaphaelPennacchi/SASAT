@@ -1,17 +1,20 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
-Temperature = []
-Clausules = []
+iteraction = []
+sucessLevel = []
 
-ref_arquivo = open("result20-1.txt","r")
-valores = []
+ref_arquivo = open("result20-teste.txt","r")
 
 for linha in ref_arquivo:
-    valores = array(linha.split())
+    valores = linha.split()
+    valores = np.array(valores)
     print(valores)
+    
 
-    Temperature.append(valores)
-    Clausules.append(valores)
+    iteraction.append(valores[0])
+    sucessLevel.append(valores[1])
 
-plt.plot(Temperature, Clausules)
+plt.axis([0, 25, 0, 20])
+plt.plot(iteraction, sucessLevel, 'o')
 plt.show()

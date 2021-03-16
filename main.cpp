@@ -10,7 +10,7 @@ double wtime() {
 
 int main(int argc, char const* argv[]) {
   FileOperator file;
-  file.listOptions();
+  //file.listOptions();
   vector<Clausule> data = file.read(file.options[atoi(argv[2])]);
   Solution solution(file.nClause);
   solution.generate();

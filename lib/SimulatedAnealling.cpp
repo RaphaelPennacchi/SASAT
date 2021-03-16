@@ -31,7 +31,7 @@ struct SimulatedAnealling {
   pair <vector<bool>, int> run(Solution solution, vector <Clausule> clausule, int maxIterations, double initialTemp, double finalTemp, int tempFunction, int interLoop) {
     // Set the initial solution
     Solution fooSolution = solution;
-    int sucess = 0, fooSucess = 0;
+    int sucess = 0, fooSucess = 0, maxGlobal = 0;
     double temperature = initialTemp;
     int probability, cost;
     int i;
@@ -39,7 +39,7 @@ struct SimulatedAnealling {
 
     while (iteraction < maxIterations) {
       iteraction++;
-      if (iteraction%100 == 0) cout << iteraction << " " << fooSucess << " " << endl;
+      if (iteraction%1000 == 0 and iteraction != 0) cout << iteraction << " " << maxGlobal << " " << endl;
 
       for (i = 0; i < interLoop; i++) {
         //Essa variável iteraction que será passada para a temperatura
@@ -50,12 +50,13 @@ struct SimulatedAnealling {
         if (fooSucess > sucess) {
           sucess = fooSucess;
           solution = fooSolution;
+          maxGlobal = maxGlobal > sucess ? maxGlobal : sucess;
         }
         else {
           // Função para atualizar a temperatura
           // If para ver se aceita a nova solução ou não
           probability = (double)rand() / RAND_MAX;
-          cost = exp((double)-(fooSucess - sucess) / temperature);
+          cost = exp((double)(fooSucess - sucess) / temperature);
           if (cost > probability) {
             sucess = fooSucess;
             solution = fooSolution;
@@ -68,7 +69,7 @@ struct SimulatedAnealling {
       else temperature = calculateTemperature(iteraction, maxIterations, initialTemp, finalTemp);
       i = 0;
     }
-    return make_pair(solution.solution, sucess);
+    return make_pair(solution.solution, maxGlobal);
   }
 
   bool compare(double x, double y, double epsilon = 0.0000001f){

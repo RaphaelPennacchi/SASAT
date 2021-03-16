@@ -15,18 +15,21 @@ struct RandomSearch {
   }
 
   pair <vector<bool>, int> run(Solution initialSolution, vector <Clausule> clausule, int maxIterations) {
+
     Solution fooSolution = initialSolution;
     int fooSolutionAmount = sucessAmount(initialSolution, clausule);
     Solution randomSolution(initialSolution.nVariable);
     int randomSolutionAmount;
+    int i = 0;
 
-    for (int i = 0; i < maxIterations; i++) {
+    for (; i < maxIterations; i++) {
       randomSolution.generate();
       randomSolutionAmount = sucessAmount(randomSolution, clausule);
       if (randomSolutionAmount > fooSolutionAmount) {
         fooSolution = randomSolution;
         fooSolutionAmount = randomSolutionAmount;
       }
+      if (i%1000 == 0 and i != 0) cout << i << " " << fooSolutionAmount << " " << endl;
     }
     // Return fooSolution, fooSolutionAmount;
     return make_pair(fooSolution.solution, fooSolutionAmount);
